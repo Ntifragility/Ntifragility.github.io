@@ -64,81 +64,101 @@ export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: st
                     </div>
                 ` : ''}
 
-                <!-- Dashboard Action Grid -->
+                <!-- Dashboard Action Grid: Balanced Minimalist 2x2 -->
                 <div class="admin-hub-grid">
                     <!-- Card 1: Article Management -->
                     <a href="#admin/manage" class="admin-hub-card">
-                        <div class="admin-hub-card-icon" style="background: rgba(77, 153, 255, 0.15); color: #4d99ff;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
+                        <div class="admin-hub-card-header">
+                            <div class="admin-hub-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                            </div>
+                            <span class="admin-hub-meta">${articleCount} articles</span>
+                            <div class="admin-hub-arrow">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </div>
                         </div>
                         <div class="admin-hub-card-content">
-                            <div class="admin-hub-card-header">
-                                <h3>Manage Articles</h3>
-                                <span class="admin-hub-badge">${articleCount} Articles</span>
-                            </div>
-                            <p>Browse existing notes, edit markdown in-browser, view public pages, or remove articles from database.</p>
-                            <span class="admin-hub-link-text">Open Manager →</span>
+                            <h3>Manage Articles</h3>
+                            <p>Browse notes, live math previews, publish states, or remove articles from your cloud vault.</p>
                         </div>
                     </a>
 
                     <!-- Card 2: Create New Article -->
-                    <a href="#admin/new" class="admin-hub-card highlight">
-                        <div class="admin-hub-card-icon" style="background: rgba(0, 200, 83, 0.15); color: #00c853;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
+                    <a href="#admin/new" class="admin-hub-card">
+                        <div class="admin-hub-card-header">
+                            <div class="admin-hub-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <span class="admin-hub-meta">Live Editor</span>
+                            <div class="admin-hub-arrow">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </div>
                         </div>
                         <div class="admin-hub-card-content">
-                            <div class="admin-hub-card-header">
-                                <h3>New Article / Note</h3>
-                                <span class="admin-hub-badge green">Live Editor</span>
-                            </div>
-                            <p>Compose an engineering article from scratch with split-pane live KaTeX math, charts, and image upload.</p>
-                            <span class="admin-hub-link-text">Create Note →</span>
+                            <h3>New Article / Note</h3>
+                            <p>Compose an engineering note from scratch with split-pane KaTeX math, charts, and asset uploads.</p>
                         </div>
                     </a>
 
                     <!-- Card 3: Tools & Useful Links Management -->
                     <a href="#admin/links" class="admin-hub-card">
-                        <div class="admin-hub-card-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                            </svg>
+                        <div class="admin-hub-card-header">
+                            <div class="admin-hub-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                </svg>
+                            </div>
+                            <span class="admin-hub-meta">${linksCount} resources</span>
+                            <div class="admin-hub-arrow">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </div>
                         </div>
                         <div class="admin-hub-card-content">
-                            <div class="admin-hub-card-header">
-                                <h3>Tools & Useful Links</h3>
-                                <span class="admin-hub-badge purple">${linksCount} Items</span>
-                            </div>
-                            <p>Manage external engineering tools, industry standards, technical guides, and code repositories live.</p>
-                            <span class="admin-hub-link-text">Manage Links →</span>
+                            <h3>Tools & Useful Links</h3>
+                            <p>Manage external engineering calculators, vendor software, industry standards, and handbooks live.</p>
                         </div>
                     </a>
 
                     <!-- Card 4: Bulk Obsidian Folder Upload -->
                     <a href="#admin/upload" class="admin-hub-card">
-                        <div class="admin-hub-card-icon" style="background: rgba(255, 170, 0, 0.15); color: #ffaa00;">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-                                <line x1="12" y1="11" x2="12" y2="17"></line>
-                                <polyline points="9 14 12 11 15 14"></polyline>
-                            </svg>
+                        <div class="admin-hub-card-header">
+                            <div class="admin-hub-card-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                    <line x1="12" y1="11" x2="12" y2="17"></line>
+                                    <polyline points="9 14 12 11 15 14"></polyline>
+                                </svg>
+                            </div>
+                            <span class="admin-hub-meta">Cloud Sync</span>
+                            <div class="admin-hub-arrow">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </div>
                         </div>
                         <div class="admin-hub-card-content">
-                            <div class="admin-hub-card-header">
-                                <h3>Sync Obsidian Vault</h3>
-                                <span class="admin-hub-badge amber">Bulk Sync</span>
-                            </div>
-                            <p>Select your local Obsidian folder or drag-and-drop to batch-upload notes, diagrams, and assets to cloud storage.</p>
-                            <span class="admin-hub-link-text">Upload Folder →</span>
+                            <h3>Sync Obsidian Vault</h3>
+                            <p>Batch-upload your local Obsidian workspace folder with automated image asset detection and indexing.</p>
                         </div>
                     </a>
                 </div>

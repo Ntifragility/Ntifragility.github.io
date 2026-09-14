@@ -164,23 +164,43 @@ export class AdminLinksController {
         const form = this.container.querySelector<HTMLFormElement>('#admin-link-form');
         const modalTitle = this.container.querySelector<HTMLElement>('#link-modal-title');
         const cancelBtn = this.container.querySelector<HTMLButtonElement>('#modal-cancel-link-btn');
+        const closeIconBtn = this.container.querySelector<HTMLButtonElement>('#modal-close-icon-btn');
+        const sectionBtns = this.container.querySelectorAll<HTMLButtonElement>('.modal-section-btn');
+        const sectionHidden = this.container.querySelector<HTMLInputElement>('#link-form-section');
+
+        // Modal Section Switcher buttons
+        sectionBtns.forEach(btn => {
+            const handler = () => {
+                const sec = btn.dataset.section as 'tools' | 'links';
+                if (sec && sectionHidden) {
+                    sectionHidden.value = sec;
+                    sectionBtns.forEach(b => b.classList.toggle('active', b.dataset.section === sec));
+                }
+            };
+            btn.addEventListener('click', handler);
+            this.cleanups.push(() => btn.removeEventListener('click', handler));
+        });
 
         if (addBtn && modal && form) {
             const handleAdd = () => {
                 form.reset();
                 const idInput = form.querySelector<HTMLInputElement>('#link-form-id');
-                const sectionInput = form.querySelector<HTMLSelectElement>('#link-form-section');
                 const orderInput = form.querySelector<HTMLInputElement>('#link-form-order');
                 const errorBox = form.querySelector<HTMLElement>('#link-form-error');
 
                 if (idInput) idInput.value = '';
-                if (sectionInput) sectionInput.value = this.currentSection;
+                if (sectionHidden) sectionHidden.value = this.currentSection;
+                sectionBtns.forEach(b => b.classList.toggle('active', b.dataset.section === this.currentSection));
+
                 if (orderInput) {
                     const currentSectionItems = this.allItems.filter(i => i.section === this.currentSection);
                     orderInput.value = currentSectionItems.length.toString();
                 }
                 if (errorBox) errorBox.style.display = 'none';
                 if (modalTitle) modalTitle.textContent = this.currentSection === 'tools' ? 'Add Engineering Tool' : 'Add Useful Link';
+
+                // Reset chip active states
+                this.container.querySelectorAll('.preset-chip, .logo-chip-btn').forEach(c => c.classList.remove('active'));
 
                 this.updateIconPreview('');
                 modal.style.display = 'flex';
@@ -190,12 +210,16 @@ export class AdminLinksController {
         }
 
         // Cancel modal
-        if (cancelBtn && modal) {
-            const handleCancel = () => {
-                modal.style.display = 'none';
-            };
-            cancelBtn.addEventListener('click', handleCancel);
-            this.cleanups.push(() => cancelBtn.removeEventListener('click', handleCancel));
+        const handleCancelModal = () => {
+            if (modal) modal.style.display = 'none';
+        };
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', handleCancelModal);
+            this.cleanups.push(() => cancelBtn.removeEventListener('click', handleCancelModal));
+        }
+        if (closeIconBtn) {
+            closeIconBtn.addEventListener('click', handleCancelModal);
+            this.cleanups.push(() => closeIconBtn.removeEventListener('click', handleCancelModal));
         }
 
         // Form Preset Chips (Categories)
@@ -205,6 +229,7 @@ export class AdminLinksController {
             const handler = () => {
                 if (categoryInput && chip.dataset.cat) {
                     categoryInput.value = chip.dataset.cat;
+                    categoryChips.forEach(c => c.classList.toggle('active', c === chip));
                 }
             };
             chip.addEventListener('click', handler);
@@ -219,6 +244,7 @@ export class AdminLinksController {
                 if (iconInput && chip.dataset.path) {
                     iconInput.value = chip.dataset.path;
                     this.updateIconPreview(chip.dataset.path);
+                    logoChips.forEach(c => c.classList.toggle('active', c === chip));
                 }
             };
             chip.addEventListener('click', handler);
@@ -228,7 +254,9 @@ export class AdminLinksController {
         // Live Icon Preview
         if (iconInput) {
             const handleIconInput = () => {
-                this.updateIconPreview(iconInput.value.trim());
+                const val = iconInput.value.trim();
+                this.updateIconPreview(val);
+                logoChips.forEach(c => c.classList.toggle('active', c.dataset.path === val));
             };
             iconInput.addEventListener('input', handleIconInput);
             this.cleanups.push(() => iconInput.removeEventListener('input', handleIconInput));
@@ -398,7 +426,8 @@ export class AdminLinksController {
         form.reset();
 
         const idInput = form.querySelector<HTMLInputElement>('#link-form-id');
-        const sectionInput = form.querySelector<HTMLSelectElement>('#link-form-section');
+        const sectionHidden = form.querySelector<HTMLInputElement>('#link-form-section');
+        const sectionBtns = form.querySelectorAll<HTMLButtonElement>('.modal-section-btn');
         const categoryInput = form.querySelector<HTMLInputElement>('#link-form-category');
         const titleInput = form.querySelector<HTMLInputElement>('#link-form-title');
         const descInput = form.querySelector<HTMLTextAreaElement>('#link-form-description');
@@ -408,7 +437,9 @@ export class AdminLinksController {
         const errorBox = form.querySelector<HTMLElement>('#link-form-error');
 
         if (idInput) idInput.value = item.id;
-        if (sectionInput) sectionInput.value = item.section;
+        if (sectionHidden) sectionHidden.value = item.section;
+        sectionBtns.forEach(b => b.classList.toggle('active', b.dataset.section === item.section));
+
         if (categoryInput) categoryInput.value = item.category;
         if (titleInput) titleInput.value = item.title;
         if (descInput) descInput.value = item.description || '';
@@ -416,6 +447,13 @@ export class AdminLinksController {
         if (iconInput) iconInput.value = item.icon || '';
         if (orderInput) orderInput.value = (item.sort_order ?? 0).toString();
         if (errorBox) errorBox.style.display = 'none';
+
+        // Highlight matching chips
+        const categoryChips = form.querySelectorAll<HTMLElement>('.preset-chip');
+        categoryChips.forEach(c => c.classList.toggle('active', c.dataset.cat === item.category));
+
+        const logoChips = form.querySelectorAll<HTMLButtonElement>('.logo-chip-btn');
+        logoChips.forEach(c => c.classList.toggle('active', c.dataset.path === item.icon));
 
         if (modalTitle) modalTitle.textContent = `Edit "${item.title}"`;
         this.updateIconPreview(item.icon || '');

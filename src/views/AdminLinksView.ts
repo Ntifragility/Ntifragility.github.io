@@ -158,67 +158,85 @@ export function renderAdminLinksView(
 
         <!-- Add / Edit Modal -->
         <div class="admin-modal-overlay" id="admin-link-edit-modal" style="display: none;">
-            <div class="admin-modal-card admin-link-form-card">
+            <div class="admin-modal-card admin-minimal-modal-card">
                 <div class="admin-modal-header">
-                    <div class="admin-modal-icon info">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                        </svg>
+                    <div>
+                        <h3 id="link-modal-title" class="admin-modal-title">Edit Resource</h3>
+                        <p class="admin-modal-subtitle">Configure engineering tool or reference documentation link</p>
                     </div>
-                    <h3 id="link-modal-title">Add New Link / Tool</h3>
+                    <button type="button" class="admin-modal-close-btn" id="modal-close-icon-btn" title="Close">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
                 </div>
 
-                <form id="admin-link-form" class="admin-link-form">
+                <form id="admin-link-form" class="admin-minimal-form">
                     <input type="hidden" id="link-form-id" value="" />
+                    <input type="hidden" id="link-form-section" value="tools" />
 
-                    <div class="form-row-2col">
-                        <div class="admin-form-group">
-                            <label for="link-form-section">Target Section *</label>
-                            <select id="link-form-section" class="admin-form-input" required>
-                                <option value="tools">⚡ Engineering Tools (#tools)</option>
-                                <option value="links">🔗 Useful Links & Standards (#links)</option>
-                            </select>
-                        </div>
-                        <div class="admin-form-group">
-                            <label for="link-form-category">Category *</label>
-                            <input type="text" id="link-form-category" class="admin-form-input" placeholder="e.g. distribution, standards, guides..." required />
-                            <div class="category-presets" id="category-presets">
-                                <span class="preset-chip" data-cat="distribution">distribution</span>
-                                <span class="preset-chip" data-cat="cables-grounding">cables-grounding</span>
-                                <span class="preset-chip" data-cat="power-quality">power-quality</span>
-                                <span class="preset-chip" data-cat="standards">standards</span>
-                                <span class="preset-chip" data-cat="guides">guides</span>
-                                <span class="preset-chip" data-cat="codes">codes</span>
-                            </div>
+                    <!-- Section Switcher -->
+                    <div class="admin-minimal-field">
+                        <label class="admin-field-label">Target Section</label>
+                        <div class="modal-section-segmented" id="modal-section-switcher">
+                            <button type="button" class="modal-section-btn active" data-section="tools">
+                                <span>⚡ Engineering Tools (#tools)</span>
+                            </button>
+                            <button type="button" class="modal-section-btn" data-section="links">
+                                <span>🔗 Useful Links (#links)</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="admin-form-group">
-                        <label for="link-form-title">Title / Name *</label>
-                        <input type="text" id="link-form-title" class="admin-form-input" placeholder="e.g. ABB PowerCore" required />
+                    <!-- Row 2: Title & Category -->
+                    <div class="form-grid-2col">
+                        <div class="admin-minimal-field">
+                            <label class="admin-field-label" for="link-form-title">Title / Name *</label>
+                            <input type="text" id="link-form-title" class="admin-minimal-input" placeholder="e.g. SIMARIS Planning Tools" required />
+                        </div>
+                        <div class="admin-minimal-field">
+                            <label class="admin-field-label" for="link-form-category">Category *</label>
+                            <input type="text" id="link-form-category" class="admin-minimal-input" placeholder="e.g. distribution, standards..." required />
+                        </div>
                     </div>
 
-                    <div class="admin-form-group">
-                        <label for="link-form-description">Description</label>
-                        <textarea id="link-form-description" class="admin-form-input" rows="2" placeholder="Brief technical summary of this software or resource..."></textarea>
+                    <!-- Category Preset Chips -->
+                    <div class="category-presets-wrapper">
+                        <span class="preset-label">Suggested:</span>
+                        <div class="category-presets" id="category-presets">
+                            <span class="preset-chip" data-cat="distribution">distribution</span>
+                            <span class="preset-chip" data-cat="cables-grounding">cables-grounding</span>
+                            <span class="preset-chip" data-cat="power-quality">power-quality</span>
+                            <span class="preset-chip" data-cat="standards">standards</span>
+                            <span class="preset-chip" data-cat="guides">guides</span>
+                            <span class="preset-chip" data-cat="codes">codes</span>
+                        </div>
                     </div>
 
-                    <div class="admin-form-group">
-                        <label for="link-form-url">Target Web Address (URL) *</label>
-                        <input type="url" id="link-form-url" class="admin-form-input" placeholder="https://..." required />
+                    <!-- Description -->
+                    <div class="admin-minimal-field">
+                        <label class="admin-field-label" for="link-form-description">Description</label>
+                        <textarea id="link-form-description" class="admin-minimal-textarea" rows="2" placeholder="Brief technical summary..."></textarea>
                     </div>
 
-                    <div class="admin-form-group">
-                        <label for="link-form-icon">Icon / Logo Image Path or URL *</label>
+                    <!-- URL -->
+                    <div class="admin-minimal-field">
+                        <label class="admin-field-label" for="link-form-url">Target Web Address (URL) *</label>
+                        <input type="url" id="link-form-url" class="admin-minimal-input" placeholder="https://www.example.com" required />
+                    </div>
+
+                    <!-- Logo / Icon -->
+                    <div class="admin-minimal-field">
+                        <label class="admin-field-label" for="link-form-icon">Brand Logo / Icon *</label>
                         <div class="icon-input-row">
-                            <input type="text" id="link-form-icon" class="admin-form-input" placeholder="e.g. logos/abb.svg or https://..." required />
                             <div class="icon-preview-box" id="icon-preview-box" title="Logo Preview">
                                 <span class="preview-placeholder">Logo</span>
                             </div>
+                            <input type="text" id="link-form-icon" class="admin-minimal-input" placeholder="e.g. logos/siemens.svg or image URL" required />
                         </div>
                         <div class="logo-presets">
-                            <span class="logo-presets-label">Preset Logos:</span>
+                            <span class="preset-label">Presets:</span>
                             <div class="logo-presets-chips">
                                 ${AVAILABLE_LOGOS.map(logo => `
                                     <button type="button" class="logo-chip-btn" data-path="${logo.path}">${logo.label}</button>
@@ -227,16 +245,17 @@ export function renderAdminLinksView(
                         </div>
                     </div>
 
-                    <div class="admin-form-group">
-                        <label for="link-form-order">Sort Order Priority (Lower appears first)</label>
-                        <input type="number" id="link-form-order" class="admin-form-input" value="0" min="0" />
+                    <!-- Sort Order -->
+                    <div class="admin-minimal-field">
+                        <label class="admin-field-label" for="link-form-order">Sort Priority (Lower numbers appear first)</label>
+                        <input type="number" id="link-form-order" class="admin-minimal-input" value="0" min="0" style="max-width: 140px;" />
                     </div>
 
-                    <div id="link-form-error" class="admin-form-error" style="display: none;"></div>
+                    <div id="link-form-error" class="admin-minimal-error" style="display: none;"></div>
 
                     <div class="admin-modal-actions">
-                        <button type="button" class="admin-action-btn secondary" id="modal-cancel-link-btn">Cancel</button>
-                        <button type="submit" class="admin-action-btn primary" id="modal-save-link-btn">
+                        <button type="button" class="admin-minimal-ghost-btn" id="modal-cancel-link-btn">Cancel</button>
+                        <button type="submit" class="admin-minimal-primary-btn" id="modal-save-link-btn">
                             <span id="btn-save-link-text">Save Link</span>
                         </button>
                     </div>
@@ -246,23 +265,19 @@ export function renderAdminLinksView(
 
         <!-- Delete Confirmation Modal -->
         <div class="admin-modal-overlay" id="admin-link-delete-modal" style="display: none;">
-            <div class="admin-modal-card">
+            <div class="admin-modal-card admin-minimal-modal-card" style="max-width: 440px;">
                 <div class="admin-modal-header">
-                    <div class="admin-modal-icon warning">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                            <line x1="12" y1="9" x2="12" y2="13"></line>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
+                    <div>
+                        <h3 class="admin-modal-title">Delete Resource?</h3>
+                        <p class="admin-modal-subtitle">This item will be removed from your website.</p>
                     </div>
-                    <h3>Delete Link / Tool?</h3>
                 </div>
-                <p class="admin-modal-body">
-                    Are you sure you want to delete <strong id="delete-link-title"></strong>? It will immediately be removed from your website.
+                <p class="admin-modal-body" style="margin: 0.5rem 0; font-size: 0.9rem; color: #cbd5e1;">
+                    Are you sure you want to delete <strong id="delete-link-title" style="color: #ffffff;"></strong>?
                 </p>
                 <div class="admin-modal-actions">
-                    <button type="button" class="admin-action-btn secondary" id="modal-cancel-link-delete">Cancel</button>
-                    <button type="button" class="admin-action-btn danger" id="modal-confirm-link-delete">Yes, Delete</button>
+                    <button type="button" class="admin-minimal-ghost-btn" id="modal-cancel-link-delete">Cancel</button>
+                    <button type="button" class="admin-minimal-primary-btn" id="modal-confirm-link-delete" style="background: #dc2626; border-color: rgba(220, 38, 38, 0.4);">Yes, Delete</button>
                 </div>
             </div>
         </div>
