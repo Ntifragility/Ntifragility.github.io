@@ -12,6 +12,8 @@ export const navigationData = {
     logo: 'Marco',
     links: [
         { label: 'Start', href: '#hero' },
-        { label: 'Content', href: '#content' }
+        { label: 'Tools', href: '#tools' },
+        { label: 'Links', href: '#links' },
+        { label: 'Knowledge', href: '#knowledge' }
     ] as NavLink[]
 };

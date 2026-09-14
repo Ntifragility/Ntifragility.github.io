@@ -336,6 +336,12 @@
     border-color: rgba(255, 170, 0, 0.3);
 }
 
+.admin-hub-badge.purple {
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border-color: rgba(168, 85, 247, 0.3);
+}
+
 .admin-hub-card p {
     font-size: 0.88rem;
     color: rgba(255, 255, 255, 0.65);
@@ -1267,4 +1273,241 @@
     color: #ffffff;
     border-color: #ef4444;
 }
+
+/* =========================================================================
+   12. Tools & Useful Links Management (#admin/links)
+   ========================================================================= */
+.admin-links-tabs-bar {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.35rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.admin-links-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-links-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.admin-links-tab-btn.active {
+    color: #ffffff;
+    background: rgba(77, 153, 255, 0.18);
+    border-color: rgba(77, 153, 255, 0.4);
+    box-shadow: 0 0 15px rgba(77, 153, 255, 0.15);
+}
+
+.admin-tab-count {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.admin-links-tab-btn.active .admin-tab-count {
+    background: rgba(77, 153, 255, 0.3);
+    color: #ffffff;
+}
+
+.admin-link-item-flex {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.admin-link-icon-thumb {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.admin-link-icon-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.admin-link-destination {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #80b3ff;
+    font-size: 0.82rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.admin-link-destination:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.admin-footer-links-quick {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin-link-form-card {
+    max-width: 620px;
+    width: 100%;
+    background: rgba(18, 20, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.admin-link-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .form-row-2col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.category-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.45rem;
+}
+
+.preset-chip {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(77, 153, 255, 0.08);
+    border: 1px solid rgba(77, 153, 255, 0.25);
+    color: #80b3ff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.preset-chip:hover {
+    background: rgba(77, 153, 255, 0.25);
+    color: #ffffff;
+    border-color: #4d99ff;
+}
+
+.icon-input-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.icon-preview-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.icon-preview-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.preview-placeholder {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 500;
+}
+
+.logo-presets {
+    margin-top: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.logo-presets-label {
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+}
+
+.logo-presets-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.logo-chip-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.74rem;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.logo-chip-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-form-error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 0.6rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.84rem;
+}
+
 

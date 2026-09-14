@@ -39,15 +39,15 @@ export function renderToolCard(item: ToolItem, index: number): string {
     const delay = (rowIndex * 0.25) + (colIndex * 0.1);
 
     return `
-        <article class="glass reveal-item tool-card" style="transition-delay: ${delay}s" data-url="${item.url}">
+        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="glass reveal-item tool-card" style="transition-delay: ${delay}s" data-url="${item.url}">
             <div class="card-inner">
                 <div class="card-image-wrap tool-card-icon">
-                    <img src="${item.icon}" alt="${item.title}">
+                    <img src="${item.icon}" alt="${item.title}" loading="lazy">
                 </div>
                 <h3 class="tool-card-title">${item.title}</h3>
                 <p class="tool-card-desc">${item.description}</p>
             </div>
-        </article>
+        </a>
     `;
 }
 

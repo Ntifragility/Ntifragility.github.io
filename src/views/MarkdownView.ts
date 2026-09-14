@@ -23,7 +23,7 @@ export function renderBreadcrumbs(metadata: Record<string, string>, path: string
 
     return `
         <div class="markdown-breadcrumbs">
-            <a href="#content" class="breadcrumb-home">Content</a>
+            <a href="#knowledge" class="breadcrumb-home">Knowledge</a>
             <span class="breadcrumb-separator">/</span>
             <span class="breadcrumb-category">${category}</span>
             <span class="breadcrumb-separator">/</span>

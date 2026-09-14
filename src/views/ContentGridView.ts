@@ -89,7 +89,7 @@ function getSubjectIcon(name: string): string {
  */
 export function renderContentSectionShell(): string {
     return `
-        <section id="content" class="grid-section">
+        <section id="knowledge" class="grid-section">
             <div id="content-view-container" class="content-view-container"></div>
         </section>
     `;

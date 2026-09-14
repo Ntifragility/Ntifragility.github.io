@@ -12,6 +12,7 @@ import { renderNavigation } from '@/views/NavigationView';
 import { renderHero } from '@/views/HeroView';
 import { renderIntro } from '@/views/IntroView';
 import { ToolsController } from './ToolsController';
+import { LinksController } from './LinksController';
 import { ContentController } from './ContentController';
 import { PostController } from './PostController';
 import { AdminController } from './AdminController';
@@ -24,6 +25,7 @@ export class AppController {
     private contentWrapper: HTMLElement | null;
 
     private toolsController: ToolsController | null = null;
+    private linksController: LinksController | null = null;
     private contentController: ContentController | null = null;
     private postController: PostController;
     private adminController: AdminController;
@@ -50,6 +52,7 @@ export class AppController {
         this.setupIntroEvents();
         this.setupHeroObserver();
         this.setupRouting();
+        this.setupKeyboardNavigation();
 
         // Subscribe to app state changes
         appState.onChange(() => {
@@ -80,13 +83,19 @@ export class AppController {
         });
         this.mainContent.appendChild(introWrapper);
 
-        // Render Tools section via ToolsController (Hidden)
+        // Render Tools section via ToolsController
         const toolsWrapper = document.createElement('div');
         toolsWrapper.id = 'tools-section-wrapper';
-        toolsWrapper.style.display = 'none';
         this.mainContent.appendChild(toolsWrapper);
         this.toolsController = new ToolsController(toolsWrapper);
         this.toolsController.init();
+
+        // Render Useful Links section via LinksController
+        const linksWrapper = document.createElement('div');
+        linksWrapper.id = 'links-section-wrapper';
+        this.mainContent.appendChild(linksWrapper);
+        this.linksController = new LinksController(linksWrapper);
+        this.linksController.init();
 
         // Render Content section via ContentController
         const contentWrapper = document.createElement('div');
@@ -139,7 +148,7 @@ export class AppController {
 
         this.heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (window.location.hash.startsWith('#content/')) return;
+                if (window.location.hash.startsWith('#content/') || window.location.hash.startsWith('#knowledge/')) return;
 
                 if (entry.isIntersecting) {
                     this.canvasContainer?.classList.remove('fade-out');
@@ -205,7 +214,7 @@ export class AppController {
                 } else {
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
-                        if (wasDetailView && targetId === 'content') {
+                        if (wasDetailView && (targetId === 'content' || targetId === 'knowledge')) {
                             // Instantly snap to the knowledge vault without scrolling through intermediate sections
                             document.documentElement.classList.add('no-smooth-scroll');
                             document.body.classList.add('no-smooth-scroll');
@@ -232,6 +241,56 @@ export class AppController {
                 this.canvasContainer.style.pointerEvents = 'auto';
             }
         }
+    }
+
+    private setupKeyboardNavigation(): void {
+        window.addEventListener('keydown', (e: KeyboardEvent) => {
+            // Ignore if user is currently typing in an input, textarea, or editable element
+            const activeEl = document.activeElement as HTMLElement | null;
+            const tagName = (activeEl?.tagName || '').toLowerCase();
+            if (tagName === 'input' || tagName === 'textarea' || activeEl?.isContentEditable) {
+                return;
+            }
+
+            // Ignore if in Admin panel or Article detail view
+            const hash = window.location.hash;
+            if (hash.startsWith('#admin') || hash.startsWith('#knowledge/') || hash.startsWith('#content/')) {
+                return;
+            }
+
+            const sections = ['hero', 'tools', 'links', 'knowledge']
+                .map(id => document.getElementById(id))
+                .filter((el): el is HTMLElement => el !== null && el.offsetParent !== null);
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                const nextSection = sections.find(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    return rect.top > 40;
+                });
+
+                if (nextSection) {
+                    e.preventDefault();
+                    nextSection.scrollIntoView({ behavior: 'smooth' });
+                    history.replaceState(null, '', `#${nextSection.id}`);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                const reversed = [...sections].reverse();
+                const prevSection = reversed.find(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    return rect.top < -40;
+                });
+
+                if (prevSection) {
+                    e.preventDefault();
+                    prevSection.scrollIntoView({ behavior: 'smooth' });
+                    history.replaceState(null, '', `#${prevSection.id}`);
+                } else if (window.scrollY > 40) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    history.replaceState(null, '', '#hero');
+                }
+            }
+        });
     }
 
     private handleStateChange(): void {

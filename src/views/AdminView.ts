@@ -8,7 +8,7 @@ import { isSupabaseConfigured } from '@/services/SupabaseClient';
 /**
  * Renders the Central Admin Dashboard Hub (#admin)
  */
-export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: string): string {
+export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: string, linksCount: number = 12): string {
     const isConfigured = isSupabaseConfigured();
 
     return `
@@ -40,7 +40,7 @@ export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: st
                                 </svg>
                                 <span>Log Out</span>
                             </button>
-                            <a href="#content" class="admin-close-btn" title="Back to Knowledge Vault">
+                            <a href="#knowledge" class="admin-close-btn" title="Back to Knowledge Vault">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -105,7 +105,25 @@ export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: st
                         </div>
                     </a>
 
-                    <!-- Card 3: Bulk Obsidian Folder Upload -->
+                    <!-- Card 3: Tools & Useful Links Management -->
+                    <a href="#admin/links" class="admin-hub-card">
+                        <div class="admin-hub-card-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                        </div>
+                        <div class="admin-hub-card-content">
+                            <div class="admin-hub-card-header">
+                                <h3>Tools & Useful Links</h3>
+                                <span class="admin-hub-badge purple">${linksCount} Items</span>
+                            </div>
+                            <p>Manage external engineering tools, industry standards, technical guides, and code repositories live.</p>
+                            <span class="admin-hub-link-text">Manage Links →</span>
+                        </div>
+                    </a>
+
+                    <!-- Card 4: Bulk Obsidian Folder Upload -->
                     <a href="#admin/upload" class="admin-hub-card">
                         <div class="admin-hub-card-icon" style="background: rgba(255, 170, 0, 0.15); color: #ffaa00;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -126,7 +144,7 @@ export function renderAdminDashboardHub(articleCount: number = 8, userEmail?: st
                 </div>
 
                 <div class="admin-panel-footer">
-                    <a href="#content" class="admin-action-btn secondary">
+                    <a href="#knowledge" class="admin-action-btn secondary">
                         Back to Knowledge Vault
                     </a>
                 </div>

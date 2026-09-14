@@ -17,7 +17,9 @@ export class ToolsController {
         this.model = new ToolsModel();
     }
 
-    public init(): void {
+    public async init(): Promise<void> {
+        this.render();
+        await this.model.loadCloudItems();
         this.render();
     }
 
@@ -42,14 +44,7 @@ export class ToolsController {
             });
         });
 
-        // Card clicks (open external URL)
-        const cards = section.querySelectorAll<HTMLElement>('.tool-card');
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const url = card.dataset.url;
-                if (url) window.open(url, '_blank');
-            });
-        });
+        // Card clicks are handled natively by the <a> element with target="_blank"
     }
 
     private handleFilterChange(filter: ToolCategory | 'all'): void {
@@ -71,14 +66,6 @@ export class ToolsController {
             const items = this.model.getFilteredItems();
             grid.innerHTML = items.map((item, index) => renderToolCard(item, index)).join('');
             
-            // Re-bind card clicks
-            grid.querySelectorAll<HTMLElement>('.tool-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const url = card.dataset.url;
-                    if (url) window.open(url, '_blank');
-                });
-            });
-
             this.setupScrollReveal();
         }
     }

@@ -77,7 +77,7 @@ export class PostController {
         // Back to Content
         const backBtn = this.container.querySelector('#back-to-home-btn');
         if (backBtn) {
-            const handleBack = () => { window.location.hash = '#content'; };
+            const handleBack = () => { window.location.hash = '#knowledge'; };
             backBtn.addEventListener('click', handleBack);
             this.cleanups.push(() => backBtn.removeEventListener('click', handleBack));
         }
@@ -131,7 +131,7 @@ export class PostController {
         if (homeBtn) {
             const handleHome = () => {
                 closeMenu();
-                window.location.hash = '#content';
+                window.location.hash = '#knowledge';
             };
             homeBtn.addEventListener('click', handleHome);
             this.cleanups.push(() => homeBtn.removeEventListener('click', handleHome));

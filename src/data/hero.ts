@@ -5,5 +5,5 @@
 
 export const heroData = {
     scrollLabel: 'Scroll Down',
-    scrollTargetId: 'content'
+    scrollTargetId: 'tools'
 };

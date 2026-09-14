@@ -59,7 +59,7 @@ export function renderAdminEditorView(data: EditorInitialData): string {
                     </button>
 
                     ${!isNew && article.id ? `
-                        <a href="#content/${article.id}" target="_blank" class="admin-topbar-btn" title="View Public Post">
+                        <a href="#knowledge/${article.id}" target="_blank" class="admin-topbar-btn" title="View Public Post">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>

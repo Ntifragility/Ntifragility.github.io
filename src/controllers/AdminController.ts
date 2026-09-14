@@ -7,7 +7,9 @@ import { renderAdminDashboardHub, renderAdminUploadView } from '@/views/AdminVie
 import { renderAdminLoginView } from '@/views/AdminLoginView';
 import { AdminManageController } from './AdminManageController';
 import { AdminEditorController } from './AdminEditorController';
+import { AdminLinksController } from './AdminLinksController';
 import { vaultService, ArticleRecord } from '@/services/VaultService';
+import { externalLinksService } from '@/services/ExternalLinksService';
 import { authService } from '@/services/AuthService';
 import { isSupabaseConfigured } from '@/services/SupabaseClient';
 
@@ -23,12 +25,14 @@ export class AdminController {
     private cleanups: (() => void)[] = [];
     private manageController: AdminManageController;
     private editorController: AdminEditorController;
+    private linksController: AdminLinksController;
     private detectedFiles: DetectedFile[] = [];
 
     constructor(container: HTMLElement) {
         this.container = container;
         this.manageController = new AdminManageController(this.container);
         this.editorController = new AdminEditorController(this.container);
+        this.linksController = new AdminLinksController(this.container);
     }
 
     public async render(subRoute: string = ''): Promise<void> {
@@ -46,6 +50,11 @@ export class AdminController {
         // Authenticated: Route Dispatcher
         if (subRoute === 'manage' || subRoute.startsWith('manage/')) {
             await this.manageController.render();
+            return;
+        }
+
+        if (subRoute === 'links' || subRoute.startsWith('links/')) {
+            await this.linksController.render();
             return;
         }
 
@@ -69,11 +78,14 @@ export class AdminController {
 
         // Default: Admin Dashboard Hub (#admin)
         try {
-            const articles = await vaultService.fetchArticles();
-            this.container.innerHTML = renderAdminDashboardHub(articles.length, authService.getUserEmail());
+            const [articles, links] = await Promise.all([
+                vaultService.fetchArticles(),
+                externalLinksService.fetchAll()
+            ]);
+            this.container.innerHTML = renderAdminDashboardHub(articles.length, authService.getUserEmail(), links.length);
             this.bindLogoutEvent();
         } catch {
-            this.container.innerHTML = renderAdminDashboardHub(0, authService.getUserEmail());
+            this.container.innerHTML = renderAdminDashboardHub(0, authService.getUserEmail(), 12);
             this.bindLogoutEvent();
         }
     }
@@ -357,5 +369,6 @@ export class AdminController {
         this.cleanups = [];
         this.manageController.destroy();
         this.editorController.destroy();
+        this.linksController.destroy();
     }
 }

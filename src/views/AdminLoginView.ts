@@ -7,7 +7,7 @@ export function renderAdminLoginView(errorMessage?: string): string {
     return `
         <div class="admin-view-wrapper">
             <div class="admin-minimal-login-card">
-                <a href="#content" class="admin-minimal-close-absolute" title="Return to Knowledge Vault">
+                <a href="#knowledge" class="admin-minimal-close-absolute" title="Return to Knowledge Vault">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -38,7 +38,7 @@ export function renderAdminLoginView(errorMessage?: string): string {
                 </form>
 
                 <div class="admin-minimal-footer">
-                    <a href="#content" class="admin-minimal-back-link">
+                    <a href="#knowledge" class="admin-minimal-back-link">
                         <span>← Return to Knowledge Vault</span>
                     </a>
                 </div>

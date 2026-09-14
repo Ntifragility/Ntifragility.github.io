@@ -34,7 +34,7 @@ export function renderAdminManageView(articles: ArticleRecord[], categories: str
                                 </svg>
                                 <span>Log Out</span>
                             </button>
-                            <a href="#content" class="admin-close-btn" title="Back to Knowledge Vault">
+                            <a href="#knowledge" class="admin-close-btn" title="Back to Knowledge Vault">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -167,7 +167,7 @@ export function renderArticleRows(articles: ArticleRecord[]): string {
                 </td>
                 <td class="admin-cell-actions">
                     <div class="admin-actions-group">
-                        <a href="#content/${article.id}" class="admin-btn-icon view" title="View Public Article" target="_blank">
+                        <a href="#knowledge/${article.id}" class="admin-btn-icon view" title="View Public Article" target="_blank">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                 <circle cx="12" cy="12" r="3"></circle>

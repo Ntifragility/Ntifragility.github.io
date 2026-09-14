@@ -68,6 +68,9 @@ export class AppState {
 
     /** Returns the post ID if the current route is a content detail route, otherwise null. */
     public getContentId(): string | null {
+        if (this._currentRoute.startsWith('#knowledge/')) {
+            return this._currentRoute.split('/')[1] || null;
+        }
         if (this._currentRoute.startsWith('#content/')) {
             return this._currentRoute.split('/')[1] || null;
         }

@@ -306,11 +306,11 @@ export class MarkdownParsing {
         });
 
         // 3. WikiLink Pre-processing
-        // Transforms [[PostID]] to <a href="#content/PostID">PostID</a>
+        // Transforms [[PostID]] to <a href="#knowledge/PostID">PostID</a>
         body = body.replace(/(?<!!)\[\[(.*?)(?:\|\s*(.*?))?\]\]/g, (_match, linkTarget, linkAlias) => {
             const cleanTarget = linkTarget.trim();
             const display = linkAlias ? linkAlias.trim() : cleanTarget;
-            return `<a href="#content/${cleanTarget}" class="wiki-link">${display}</a>`;
+            return `<a href="#knowledge/${cleanTarget}" class="wiki-link">${display}</a>`;
         });
 
         // 4. Mark Parsing

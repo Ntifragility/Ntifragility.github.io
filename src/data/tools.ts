@@ -3,7 +3,7 @@
  * @description Data definitions for the tools and tech stack.
  */
 
-export type ToolCategory = 'development' | 'design' | 'productivity' | 'learning';
+export type ToolCategory = 'distribution' | 'cables-grounding' | 'power-quality';
 export interface ToolItem {
     id: string;
     category: ToolCategory;
@@ -16,34 +16,50 @@ export interface ToolItem {
 export const toolsData: ToolItem[] = [
     {
         id: '1',
-        category: 'development',
-        title: 'Three.js',
-        description: 'Powerful 3D library for browser-based visualizations.',
-        icon: 'https://threejs.org/files/icon.png',
-        url: 'https://threejs.org/'
+        category: 'distribution',
+        title: 'ABB PowerCore',
+        description: 'Engineering & configuration tool for electrical distribution and digital power systems.',
+        icon: '/logos/abb.svg',
+        url: 'https://powercore.abb.com/en'
     },
     {
         id: '2',
-        category: 'development',
-        title: 'TypeScript',
-        description: 'Typed superset of JavaScript that scales.',
-        icon: 'https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png',
-        url: 'https://www.typescriptlang.org/'
+        category: 'distribution',
+        title: 'SIMARIS Tools',
+        description: 'Siemens cloud-based suite of planning, dimensioning, and power distribution tools.',
+        icon: '/logos/siemens.svg',
+        url: 'https://simaris-toolbox.siemens.cloud/'
     },
     {
         id: '3',
-        category: 'design',
-        title: 'Figma',
-        description: 'The industry-standard for collaborative design.',
-        icon: 'https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb49105ed418c63fb57a50ca5e64-1024x1024.png',
-        url: 'https://www.figma.com/'
+        category: 'distribution',
+        title: 'SIMARIS Planning Tools',
+        description: 'Comprehensive dimensioning and network planning software by Siemens (design, project & curves).',
+        icon: '/logos/siemens.svg',
+        url: 'https://www.siemens.com/es-es/products/simaris/'
     },
     {
         id: '4',
-        category: 'productivity',
-        title: 'Notion',
-        description: 'All-in-one workspace for notes, tasks, and wikis.',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png',
-        url: 'https://www.notion.so/'
+        category: 'cables-grounding',
+        title: 'ELEK Cable Pro Software',
+        description: 'Electrical cable sizing and thermal rating calculations compliant with IEC, AS/NZS, and IEEE.',
+        icon: '/logos/elek.png',
+        url: 'https://cablepro.elek.com/'
+    },
+    {
+        id: '5',
+        category: 'cables-grounding',
+        title: 'ELEK SafeGrid Grounding',
+        description: 'Substation earthing & grounding grid design software, analyzing touch and step voltages to IEEE 80.',
+        icon: '/logos/elek.png',
+        url: 'https://elek.com/es/electrical-software/safegrid-earthing/'
+    },
+    {
+        id: '6',
+        category: 'power-quality',
+        title: 'Eaton Harmonics Calculator',
+        description: 'Interactive online tool for estimating electrical system harmonics, THD, and IEEE 519 compliance.',
+        icon: '/logos/eaton.svg',
+        url: 'https://www.eaton.com/us/en-us/products/controls-drives-automation-sensors/harmonics/harmonics-calculator.html'
     }
 ];

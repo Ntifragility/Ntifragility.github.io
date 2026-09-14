@@ -55,7 +55,7 @@ export class ContentModel {
             subtitle: entry.subtitle || '',
             date: entry.date,
             thumbnail: entry.image,
-            url: `#content/${entry.id}`,
+            url: `#knowledge/${entry.id}`,
             category: entry.category || 'General'
         }));
 
